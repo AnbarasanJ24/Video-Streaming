@@ -1,2 +1,7 @@
 export const SIGN_IN = '[AUTH] SIGN_IN';
 export const SIGN_OUT = '[AUTH] SIGN_OUT';
+export const FETCH_STREAMS = '[STREAM] FETCH_STREAMS';
+export const FETCH_STREAM = '[STREAM] FETCH_STREAM';
+export const CREATE_STREAM = '[STREAM] CREATE_STREAM';
+export const UPDATE_STREAM = '[STREAM] UPDATE_STREAM';
+export const DELETE_STREAM = '[STREAM] DELETE_STREAM';
