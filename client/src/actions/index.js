@@ -1,6 +1,6 @@
 import stream from "../apis/stream"
 import { CREATE_STREAM, DELETE_STREAM, FETCH_STREAM, FETCH_STREAMS, SIGN_IN, SIGN_OUT, UPDATE_STREAM } from "./types"
-
+import history from "../history";
 
 export const signIn = (userId) => {
     return {
@@ -25,19 +25,23 @@ export const fetchStreams = () => async dispatch => {
 }
 
 export const fetchStream = (id) => async dispatch => {
-    const response = await stream.get(`/stream/${id}`);
+    const response = await stream.get(`/streams/${id}`);
     dispatch({
         type: FETCH_STREAM,
         payload: response.data
     })
 }
 
-export const createStream = formValues => async dispatch => {
-    const response = await stream.post('/streams', formValues)
+export const createStream = formValues => async (dispatch, getState) => {
+    const { userId } = getState().auth;
+    const response = await stream.post('/streams', { ...formValues, userId })
+
     dispatch({
         type: CREATE_STREAM,
         payload: response.data
     })
+    // Programmatically navigate to stream page
+    history.push('/');
 }
 
 
