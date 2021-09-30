@@ -34,23 +34,24 @@ export const fetchStream = (id) => async dispatch => {
 
 export const createStream = formValues => async (dispatch, getState) => {
     const { userId } = getState().auth;
-    const response = await stream.post('/streams', { ...formValues, userId })
+    const response = await stream.post('/streams', { ...formValues, userId });
 
     dispatch({
         type: CREATE_STREAM,
         payload: response.data
-    })
+    });
     // Programmatically navigate to stream page
     history.push('/');
 }
 
 
 export const updateStream = (id, formValues) => async dispatch => {
-    const response = await stream.put(`/streams/${id}`, formValues);
+    const response = await stream.patch(`/streams/${id}`, formValues);
     dispatch({
         type: UPDATE_STREAM,
         payload: response.data
-    })
+    });
+    history.push('/');
 }
 
 export const deleteStream = id => async dispatch => {
